@@ -50,7 +50,7 @@ public class Group : MonoBehaviour
     void Update()
     {
         // Move Left
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || tc.direction == -1)
         {
             // Modify position
             transform.position += new Vector3(-1, 0, 0);
@@ -62,10 +62,11 @@ public class Group : MonoBehaviour
             else
                 // It's not valid. revert.
                 transform.position += new Vector3(1, 0, 0);
+            tc.direction = 0;
         }
 
         // Move Right
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.RightArrow) || tc.direction == 1)
         {
             // Modify position
             transform.position += new Vector3(1, 0, 0);
@@ -77,10 +78,11 @@ public class Group : MonoBehaviour
             else
                 // It's not valid. revert.
                 transform.position += new Vector3(-1, 0, 0);
+            tc.direction = 0;
         }
 
         // Rotate
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        else if (Input.GetKeyDown(KeyCode.UpArrow) || tc.isRot)
         {
             _as.Play();
 
@@ -93,10 +95,11 @@ public class Group : MonoBehaviour
             else
                 // It's not valid. revert.
                 transform.Rotate(0, 0, 90);
+            tc.isRot = false;
         }
 
          //Move Downwards and Fall
-        else if (Input.GetKey(KeyCode.DownArrow) && Time.time - lastFall >= 0.3f * difficulty_mod)
+        else if ((Input.GetKey(KeyCode.DownArrow) || tc.isDown) && Time.time - lastFall >= 0.3f * difficulty_mod)
         {
             // Modify position
             transform.position += new Vector3(0, -1, 0);
