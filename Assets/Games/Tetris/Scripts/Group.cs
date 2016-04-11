@@ -4,6 +4,7 @@ using System.Collections;
 public class Group : MonoBehaviour
 {
     TetrisManager tm;
+    TetrisController tc;
 
     public AudioSource _as;
     public AudioSource drop;
@@ -37,6 +38,7 @@ public class Group : MonoBehaviour
         }
 
         tm = GameObject.FindGameObjectWithTag("Manager").GetComponent<TetrisManager>();
+        tc = GameObject.FindGameObjectWithTag("Manager").GetComponent<TetrisController>();
         // Default position not valid? Then it's game over
         if (!isValidGridPos())
         {
